@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030011111) do
+ActiveRecord::Schema.define(version: 20141030022314) do
 
   create_table "items", force: true do |t|
     t.string   "title"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 20141030011111) do
 
   add_index "ratings", ["item_id"], name: "index_ratings_on_item_id", using: :btree
   add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
+
+  create_table "similarities", force: true do |t|
+    t.integer  "subject_id"
+    t.integer  "object_id"
+    t.float    "value",      limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "similarities", ["object_id"], name: "index_similarities_on_object_id", using: :btree
+  add_index "similarities", ["subject_id"], name: "index_similarities_on_subject_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
