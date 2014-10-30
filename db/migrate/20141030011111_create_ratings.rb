@@ -3,7 +3,8 @@ class CreateRatings < ActiveRecord::Migration
     create_table :ratings do |t|
       t.references :user, index: true
       t.references :item, index: true
-      t.float :score
+      t.float :value
+      t.boolean :prediction, default: false
 
       t.timestamps
     end

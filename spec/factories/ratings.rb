@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :rating do
     user nil
-item nil
-score 1.5
+    item nil
+    value 1.5
+    prediction false
   end
-
 end

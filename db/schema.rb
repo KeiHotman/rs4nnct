@@ -22,7 +22,8 @@ ActiveRecord::Schema.define(version: 20141030022314) do
   create_table "ratings", force: true do |t|
     t.integer  "user_id"
     t.integer  "item_id"
-    t.float    "score",      limit: 24
+    t.float    "value",      limit: 24
+    t.boolean  "prediction",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,14 +33,15 @@ ActiveRecord::Schema.define(version: 20141030022314) do
 
   create_table "similarities", force: true do |t|
     t.integer  "subject_id"
-    t.integer  "object_id"
-    t.float    "value",      limit: 24
+    t.integer  "target_id"
+    t.float    "value",           limit: 24
+    t.integer  "rated_items_num"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "similarities", ["object_id"], name: "index_similarities_on_object_id", using: :btree
   add_index "similarities", ["subject_id"], name: "index_similarities_on_subject_id", using: :btree
+  add_index "similarities", ["target_id"], name: "index_similarities_on_target_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
