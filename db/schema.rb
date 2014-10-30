@@ -11,13 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030010025) do
+ActiveRecord::Schema.define(version: 20141030011111) do
 
   create_table "items", force: true do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "ratings", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.float    "score",      limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ratings", ["item_id"], name: "index_ratings_on_item_id", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
