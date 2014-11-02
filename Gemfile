@@ -65,3 +65,4 @@ group :development, :test do
   gem 'quiet_assets'
 end
 
+gem 'poppler'

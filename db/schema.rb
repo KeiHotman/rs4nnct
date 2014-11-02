@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030132407) do
+ActiveRecord::Schema.define(version: 20141030132742) do
 
   create_table "features", force: true do |t|
     t.integer  "item_id"
@@ -24,9 +24,16 @@ ActiveRecord::Schema.define(version: 20141030132407) do
   add_index "features", ["item_id"], name: "index_features_on_item_id", using: :btree
 
   create_table "items", force: true do |t|
-    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "year"
+    t.string   "name"
+    t.string   "english_name"
+    t.integer  "grade"
+    t.integer  "department"
+    t.string   "term"
+    t.integer  "credit_num"
+    t.string   "credit_requirement"
   end
 
   create_table "ratings", force: true do |t|
