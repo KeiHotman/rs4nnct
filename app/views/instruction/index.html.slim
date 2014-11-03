@@ -1,2 +1,23 @@
-h1 Instruction#index
-p Find me in app/views/instruction/index.html.slim
+h Instruction#index
+
+- if current_user
+  div
+    = "ようこそ、#{current_user.name}さん"
+
+  div
+    = link_to 'ログアウト', session_path, method: :delete
+- else
+  div
+    'ログインする
+    = form_tag session_path
+      div
+        label メールアドレス
+        = text_field_tag :email
+      div
+        label パスワード
+        = password_field_tag :password
+      div
+        = submit_tag 'ログイン'
+
+  div
+    = link_to 'ユーザ登録', new_user_path

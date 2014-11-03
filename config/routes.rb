@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   get 'instruction/index'
   get 'instruction/exit'
 
-  # authentication
+  # authentication & session
   resources :users
+  post 'session' => 'session#create'
+  delete 'session' => 'session#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
