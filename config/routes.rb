@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  # root
+  root 'instruction#index'
+
+  # instruction
+  get 'instruction/index'
+  get 'instruction/exit'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
