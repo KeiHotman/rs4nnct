@@ -17,4 +17,13 @@ RSpec.describe ItemsController, :type => :controller do
       expect(response).to redirect_to(root_path)
     end
   end
+
+  describe "#show" do
+    it "assigns the requested item as @item" do
+      item = FactoryGirl.create(:item)
+      user = FactoryGirl.create(:user)
+      get :show, {id: item.id}, {user_id: user.id}
+      expect(assigns(:item)).to eq item
+    end
+  end
 end

@@ -1,0 +1,17 @@
+h2 = "#{@item.name}(#{@item.english_name})"
+
+div
+  dl
+    dt 学年
+    dd = @item.grade
+    dt 学科
+    dd = @item.department
+    dt 期間
+    dd = @item.term
+    dt 単位
+    dd = "#{@item.credit_num}(#{@item.credit_requirement})"
+
+- @item.features.each do |feature|
+  div
+    h3 = feature.name
+    div = feature.content
