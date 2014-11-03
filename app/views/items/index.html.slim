@@ -1,0 +1,7 @@
+h2 アイテム一覧
+
+.items_list
+  h3 評価済みアイテム
+  - @rated_items.each do |item|
+    .listed_item
+      h4 = item.name
