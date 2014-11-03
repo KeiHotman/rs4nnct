@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030132742) do
+ActiveRecord::Schema.define(version: 20141103061830) do
 
   create_table "features", force: true do |t|
     t.integer  "item_id"
@@ -64,6 +64,10 @@ ActiveRecord::Schema.define(version: 20141030132742) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
+    t.string   "password_digest"
+    t.integer  "grade"
+    t.integer  "department"
   end
 
 end
