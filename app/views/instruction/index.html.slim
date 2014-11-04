@@ -1,23 +1,37 @@
-h Instruction#index
+= content_for :main_header do
+  .grid_12
+    h2 Instruction#index
 
-- if current_user
-  div
-    = "ようこそ、#{current_user.name}さん"
+.grid_12
+  - if current_user
+    .content
+      = "ようこそ、#{current_user.name}さん"
 
-  div
-    = link_to 'ログアウト', session_path, method: :delete
-- else
-  div
-    'ログインする
-    = form_tag session_path
-      div
-        label メールアドレス
-        = text_field_tag :email
-      div
-        label パスワード
-        = password_field_tag :password
-      div
-        = submit_tag 'ログイン'
+    .content
+      h3 = "#{current_user.name}さんの登録情報"
+      dl
+        dt 所属学科・専攻
+        dd = "#{current_user.department}"
+        dt 学年
+        dd = "#{current_user.grade}年"
+      = link_to '登録情報を変更する', edit_user_path(current_user)
 
-  div
-    = link_to 'ユーザ登録', new_user_path
+    .content
+      /= link_to 'Step1. 科目を評価する', item_path(@item)
+      = link_to 'ログアウト', session_path, method: :delete
+
+  - else
+    .content
+      h4 ログインする
+      = form_tag session_path
+        div
+          label メールアドレス
+          = text_field_tag :email
+        div
+          label パスワード
+          = password_field_tag :password
+        div
+          = submit_tag 'ログイン'
+
+    .content
+      = link_to 'ユーザ登録', new_user_path
