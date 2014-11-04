@@ -1,7 +1,13 @@
 h2 アイテム一覧
 
 .items_list
+  h3 全アイテム
+  ul
+    - @items.each do |item|
+      li.listed_item = link_to item.name, item_path(item)
+
+.items_list
   h3 評価済みアイテム
-  - @rated_items.each do |item|
-    .listed_item
-      h4 = item.name
+  ul
+    - @rated_items.each do |item|
+      li.listed_item = link_to item.name, item_path(item)
