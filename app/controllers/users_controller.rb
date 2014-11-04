@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :unauthenticate_user!, only: %i(new create)
+  before_action :authenticate_user!, only: %i(edit update)
 
   def new
     @user = User.new
@@ -17,12 +18,17 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = current_user
   end
 
   def update
-  end
+    @user = current_user
 
-  def destroy
+    if @user.update(user_params)
+      redirect_to root_path, notice: "変更しました。"
+    else
+      render 'edit'
+    end
   end
 
   private

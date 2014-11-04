@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'instruction/exit'
 
   # authentication & session
-  resources :users
+  resources :users, except: %i(destroy)
   post 'session' => 'session#create'
   delete 'session' => 'session#destroy'
 

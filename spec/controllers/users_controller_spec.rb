@@ -37,11 +37,25 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "#edit" do
+    it "assigns the current_user as @user" do
+      user = FactoryGirl.create(:user)
+      get :edit, {id: user.id}, {user_id: user.id}
+      expect(assigns(:user)).to eq user
+    end
   end
 
   describe "#update" do
-  end
+    it "assigns the current_user as @user" do
+      user = FactoryGirl.create(:user)
+      patch :update, {id: user.id, user: {name: 'New' + user.name}}, {user_id: user.id}
+      expect(assigns(:user)).to eq user
+    end
 
-  describe "#destroy" do
+    it "updates the current_user with parameters" do
+      user = FactoryGirl.create(:user)
+      patch :update, {id: user.id, user: {name: 'New' + user.name}}, {user_id: user.id}
+      expect(assigns(:user).name).to eq 'New' + user.name
+      expect(assigns(:user)).to be_persisted
+    end
   end
 end
