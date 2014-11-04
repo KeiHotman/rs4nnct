@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   delete 'session' => 'session#destroy'
 
   # items
-  resources :items
+  resources :items do
+    post :rating, on: :member
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

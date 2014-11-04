@@ -26,4 +26,21 @@ RSpec.describe ItemsController, :type => :controller do
       expect(assigns(:item)).to eq item
     end
   end
+
+  describe "#rating" do
+    it "assigns the requested item as @item" do
+      item = FactoryGirl.create(:item)
+      user = FactoryGirl.create(:user)
+      post :rating, {id: item.id}, {user_id: user.id}
+      expect(assigns(:item)).to eq item
+    end
+
+    it "creates current_user's new rating" do
+      item = FactoryGirl.create(:item)
+      user = FactoryGirl.create(:user)
+      expect{
+        post :rating, {id: item.id, value: 3}, {user_id: user.id}
+      }.to change(Rating, :count).from(0).to(1)
+    end
+  end
 end

@@ -1,6 +1,14 @@
 h2 = "#{@item.name}(#{@item.english_name})"
 
 div
+  - 5.times do |i|
+    div
+      - if @rating && @rating.value == i + 1
+        = i + 1
+      - else
+        = link_to i + 1, rating_item_path(@item, value: i + 1), method: :post
+
+div
   dl
     dt 学年
     dd = @item.grade
