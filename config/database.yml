@@ -19,14 +19,14 @@ default: &default
 
 development:
   <<: *default
-  database: similars_development
+  database: rs4nnct_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: similars_test
+  database: rs4nnct_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: similars_production
-  username: similars
+  database: rs4nnct_production
+  username: rs4nnct
   password: <%= ENV['SIMILARS_DATABASE_PASSWORD'] %>
