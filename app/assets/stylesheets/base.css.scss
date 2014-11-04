@@ -1,0 +1,29 @@
+$logo_color: rgba(0, 0, 255, 1);
+
+@mixin logofont {
+  font: {
+    size: 300%;
+    weight: bold;
+  }
+}
+
+body {
+  .header {
+    h1 {
+      @include logofont;
+    }
+  }
+
+  .content {
+    margin-bottom: 10px;
+  }
+
+  dt {
+    float: left;
+    margin-right: 10px;
+  }
+
+  dd {
+    font-weight: bold;
+  }
+}
