@@ -7,12 +7,12 @@ html lang='ja'
   = csrf_meta_tags
 
   body
-    .container_12
+    .wrapper
       .header
         = render partial: 'shared/header'
       .main
         = yield(:main_header)
-        .messages.grid_12
+        .contents.messages
           = flash[:notice]
           = flash[:alert]
         = yield

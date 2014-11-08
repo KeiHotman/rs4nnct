@@ -9,7 +9,7 @@
 ----------------------------------------------------------------------------------------------------*/
 
 body {
-  font: 13px/1.5 "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font: 16px/1.5 "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
 
 pre,
@@ -28,27 +28,27 @@ hr {
 ----------------------------------------------------------------------------------------------------*/
 
 h1 {
-  font-size: 21px;
+  font-size: 23px;
 }
 
 h2 {
-  font-size: 19px;
+  font-size: 21px;
 }
 
 h3 {
-  font-size: 17px;
+  font-size: 19px;
 }
 
 h4 {
-  font-size: 15px;
+  font-size: 17px;
 }
 
 h5 {
-  font-size: 13px;
+  font-size: 15px;
 }
 
 h6 {
-  font-size: 11px;
+  font-size: 13px;
 }
 
 /* `Spacing

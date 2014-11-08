@@ -1,29 +1,54 @@
+@import "960";
+
 $logo_color: rgba(0, 0, 255, 1);
 
-@mixin logofont {
-  font: {
-    size: 300%;
-    weight: bold;
-  }
+@mixin system-width {
+  @extend .grid_8, .prefix_2;
 }
 
 body {
+  .wrapper { }
+
+  .contents { @include system-width; }
+
   .header {
+    @extend .container_12;
     h1 {
-      @include logofont;
+      font: {
+        size: 300%;
+        weight: bold;
+      }
+      a { text-decoration: none; }
     }
   }
 
-  .content {
-    margin-bottom: 10px;
-  }
+  .main {
+    @extend .container_12;
+    .message { @include system-width; }
 
-  dt {
-    float: left;
-    margin-right: 10px;
-  }
+    .content {
+      margin-bottom: 10px;
+      .rating {
+        float: right;
+        .value { float: right; }
+        .star {
+          background-size: contain;
+          background-image: image-url('star.png');
+        }
+        .star_empty {
+          background-size: contain;
+          background-image: image-url('star_empty.png');
+        }
+      }
+    }
 
-  dd {
-    font-weight: bold;
+    dt {
+      float: left;
+      margin-right: 10px;
+    }
+
+    dd {
+      font-weight: bold;
+    }
   }
 }
