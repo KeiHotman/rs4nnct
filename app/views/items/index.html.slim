@@ -1,13 +1,14 @@
-.contents
-  h2 アイテム一覧
+= content_for :main_header
+  .contents
+    h2 アイテム一覧
 
-  .content
-    h3 全アイテム
+.grid_4.prefix_2
+    h3 アイテム一覧
     ul
       - @items.each do |item|
         li.listed_item = link_to item.name, item_path(item)
 
-  .content
+.grid_4
     h3 評価済みアイテム
     ul
       - @rated_items.each do |item|

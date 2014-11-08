@@ -11,6 +11,7 @@ html lang='ja'
       .header
         = render partial: 'shared/header'
       .main
+        = yield(:main_header)
         .contents.messages
           = flash[:notice]
           = flash[:alert]

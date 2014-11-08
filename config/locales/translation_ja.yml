@@ -1,0 +1,59 @@
+ja:
+  activerecord:
+    models:
+      feature: feature  #g
+      item: item  #g
+      rating: rating  #g
+      similarity: similarity  #g
+      user: user  #g
+
+    attributes:
+      feature:
+        body: body  #g
+        item: :activerecord.models.item  #g
+        title: title  #g
+
+      item:
+        credit_num: credit_num  #g
+        credit_requirement: credit_requirement  #g
+        department: department  #g
+        english_name: english_name  #g
+        features: features  #g
+        grade: grade  #g
+        name: name  #g
+        term: term  #g
+        year: year  #g
+
+      rating:
+        item: :activerecord.models.item  #g
+        score: score  #g
+        user: :activerecord.models.user  #g
+
+      similarity:
+        subject: :activerecord.models.subject  #g
+        target: :activerecord.models.target  #g
+        value: value  #g
+
+      user:
+        current_sign_in_at: current_sign_in_at  #g
+        current_sign_in_ip: current_sign_in_ip  #g
+        email: email  #g
+        encrypted_password: encrypted_password  #g
+        last_sign_in_at: last_sign_in_at  #g
+        last_sign_in_ip: last_sign_in_ip  #g
+        remember_created_at: remember_created_at  #g
+        reset_password_sent_at: reset_password_sent_at  #g
+        reset_password_token: reset_password_token  #g
+
+    modules:
+      constants:
+        departments:
+          general: 一般教科
+          information: 情報工学科
+          electronics: 電気工学科
+          mechanical: 機械工学科
+          system: 電子制御工学科
+          chemistry: 物質化学工学科
+          advanced_ei: 電子情報工学専攻
+          advanced_ms: 機械制御工学専攻
+          advanced_c: 化学工学専攻

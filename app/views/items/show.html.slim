@@ -19,7 +19,7 @@
       dt 学年
       dd = @item.grade
       dt 学科
-      dd = @item.department
+      dd = t("activerecord.modules.constants.departments.#{@item.department}")
       dt 期間
       dd = @item.term
       dt 単位

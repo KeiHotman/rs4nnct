@@ -1,6 +1,8 @@
-.contents
-  h2 Instruction#index
+= content_for(:main_header) do
+  .contents
+    h2 Instruction#index
 
+.contents
   - if current_user
     .content
       = "ようこそ、#{current_user.name}さん"
@@ -9,7 +11,7 @@
       h3 = "#{current_user.name}さんの登録情報"
       dl
         dt 所属学科・専攻
-        dd = "#{current_user.department}"
+        dd = t("activerecord.modules.constants.departments#{current_user.department}")
         dt 学年
         dd = "#{current_user.grade}年"
       = link_to '登録情報を変更する', edit_user_path(current_user)
