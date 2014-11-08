@@ -1,0 +1,19 @@
+// rating value's link container
+$target_val = $(".item_<%= j(@item.to_param) %>.val_<%= j(params[:value].to_s) %>");
+
+// make stars bigger than the value empty
+// and remove class .persisted
+$target_val.nextAll().find('img').addClass('star_empty');
+$target_val.nextAll().find('img').removeClass('star');
+$target_val.nextAll().removeClass('persisted');
+
+// make stars equal to or smaller than the value colored
+// and add class .persisted
+$target_val.prevAll().find('img').addClass('star');
+$target_val.prevAll().find('img').removeClass('star_empty');
+
+$target_val.find('img').addClass('star');
+$target_val.find('img').removeClass('star_empty');
+
+$target_val.prevAll().addClass('persisted');
+$target_val.addClass('persisted');

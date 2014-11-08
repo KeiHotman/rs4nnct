@@ -16,7 +16,10 @@ class ItemsController < ApplicationController
     @rating = Rating.find_or_initialize_by(item: @item, user: current_user)
     @rating.value = params[:value]
     if @rating.save
-      redirect_to item_path(@item), notice: "評価しました。"
+      respond_to do |format|
+        format.html { redirect_to item_path(@item), notice: "評価しました。" }
+        format.js
+      end
     else
       redirect_to item_path(@item), alert: "不正な値です。"
     end

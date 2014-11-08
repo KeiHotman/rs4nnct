@@ -3,12 +3,16 @@
 
   .content
     .rating
+      - rating_val = @rating.present? ? @rating.value : 0
       - 5.times do |i|
-        .value
-          - if @rating && @rating.value == i + 1
-            = i + 1
-          - else
-            = link_to i + 1, rating_item_path(@item, value: i + 1), method: :post
+        - value = i + 1
+        - if rating_val < value
+          div class="value item_#{@item.id} val_#{value}"
+            = link_to image_tag('', size: '25x25', class: 'star_empty'), rating_item_path(@item, value: value), method: 'post', remote: true
+
+        - else
+          div class="value item_#{@item.id} val_#{value} persisted"
+            = link_to  image_tag('', size: '25x25', class: 'star'), rating_item_path(@item, value: value), method: 'post', remote: true
 
   .content
     dl
