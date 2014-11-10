@@ -13,4 +13,14 @@ class User < ActiveRecord::Base
   def rated_items_and(items)
     self.rated_items.joins(:ratings).merge(Rating.where(item: items)).uniq
   end
+
+  def unrated_items(from = :all)
+    if from == :own
+      items = Item.refine(grade: self.grade, department: self.department)
+    else
+      items = Item.all
+    end
+
+    items - rated_items
+  end
 end

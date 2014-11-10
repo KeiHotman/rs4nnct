@@ -29,8 +29,7 @@ body {
     .content {
       margin-bottom: 10px;
       .rating {
-        float: right;
-        .value { float: right; }
+        .value { float: left; }
         .star {
           background-size: contain;
           background-image: image-url('star.png');
