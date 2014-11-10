@@ -2,14 +2,19 @@
   .contents
     h2 アイテム一覧
 
+
 .grid_4.prefix_2
-    h3 アイテム一覧
-    ul
-      - @items.each do |item|
-        li.listed_item = link_to item.name, item_path(item)
+  h3 アイテム一覧
+  = form_tag
+    .input.select.optional.form-group
+       = select_tag 'item_grade_refine', options_for_select([["学年で絞り込む", nil], ["1年生", 1], ["2年生", 2], ["3年生", 3], ["4年生", 4], ["5年生", 5]], selected: @grade), class: 'select optional form-control'
+    .input.select.optional.form-group
+      = select_tag 'item_department_refine', options_for_select([["学科で絞り込む", nil]].concat(Constants::DEPARTMENTS_LOCALE), selected: @department), class: 'select optional form-control'
+  #items
+    = render partial: 'items/list', locals: {items: @items}
 
 .grid_4
-    h3 評価済みアイテム
-    ul
-      - @rated_items.each do |item|
-        li.listed_item = link_to item.name, item_path(item)
+  h3 評価済みアイテム
+  ul
+    - @rated_items.each do |item|
+      li.listed_item = link_to item.name, item_path(item)

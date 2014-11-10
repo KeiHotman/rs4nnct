@@ -1,3 +1,21 @@
+# item refine search
+$(document).on 'change', '#item_grade_refine', ->
+  grade      = $('#item_grade_refine').val()
+  department = $('#item_department_refine').val()
+  item_refine(grade, department)
+
+$(document).on 'change', '#item_department_refine', ->
+  grade      = $('#item_grade_refine').val()
+  department = $('#item_department_refine').val()
+  item_refine(grade, department)
+
+item_refine = (grade, department)->
+  $.ajax
+    type: 'GET'
+    url: '/items?grade=' + grade + '&department=' + department
+    dataType: 'script'
+  false
+
 # mouseover stars to be rating on courses#show
 $(document).on 'mouseenter', '.rating .value', ->
   $(this).find('img').addClass('star')

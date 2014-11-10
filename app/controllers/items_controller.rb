@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_items, only: %i(index)
 
   def index
-    @items = Item.all
     @rated_items = current_user.rated_items
   end
 
@@ -24,4 +24,11 @@ class ItemsController < ApplicationController
       redirect_to item_path(@item), alert: "不正な値です。"
     end
   end
+
+  private
+    def set_items
+      @grade = params[:grade].presence
+      @department = params[:department].presence
+      @items = Item.refine(grade: @grade, department: @department)
+    end
 end
