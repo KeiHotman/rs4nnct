@@ -28,12 +28,33 @@
         br
         = link_to '終了する', instruction_exit_path
 
-    .content
-      /= link_to 'Step1. 科目を評価する', item_path(@item)
-      = link_to 'ログアウト', session_path, method: :delete
+    - if Rails.env.development?
+      .content
+        = link_to 'ログアウト', session_path, method: :delete
 
   - else
     .content
+      p
+        '本日は被験者実験にご参加いただき、ありがとうございます。
+        '本実験では皆様の科目に対する嗜好情報を収集します。
+        '嗜好情報は次の項目についての総合的な評価を5段階の値で入力していただきます。
+      ul
+        li 授業が楽しかった。
+        li 興味のある分野である。
+        li 就職・進学で同分野を考えたい。
+
+      p
+        '被験者情報を登録していただくと実験スタートとなります。
+        '入力していただいた情報は個人が特定されないように加工して研究に活用させていただきます。
+        'このことに同意いただければ、実験をはじめてください。
+
+    .content
+      h2 ユーザ登録
+
+      = simple_form_for @user do |f|
+        = render partial: 'users/form', locals: {f: f}
+
+    /.content
       h4 ログインする
       = form_tag session_path
         div
@@ -44,6 +65,3 @@
           = password_field_tag :password
         div
           = submit_tag 'ログイン'
-
-    .content
-      = link_to 'ユーザ登録', new_user_path
