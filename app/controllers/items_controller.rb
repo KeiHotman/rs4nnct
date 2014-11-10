@@ -31,6 +31,6 @@ class ItemsController < ApplicationController
     def set_items
       @grade = params[:grade].presence
       @department = params[:department].presence
-      @items = Item.refine(grade: @grade, department: @department)
+      @items = current_user.rated_items
     end
 end

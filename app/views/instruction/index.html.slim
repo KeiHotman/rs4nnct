@@ -21,6 +21,14 @@
       = link_to '登録情報を変更する', edit_user_path(current_user)
 
     .content
+      - if @next_item
+        = link_to '未評価のアイテムを見る', item_path(@next_item)
+      - else
+        = link_to '一覧', items_path
+        br
+        = link_to '終了する', instruction_exit_path
+
+    .content
       /= link_to 'Step1. 科目を評価する', item_path(@item)
       = link_to 'ログアウト', session_path, method: :delete
 

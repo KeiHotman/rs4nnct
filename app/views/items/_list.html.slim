@@ -1,3 +1,16 @@
-ul
-  - items.each do |item|
-    li.listed_item = link_to item.name, item_path(item)
+- items.each do |item|
+  .content.listed_item
+    .rating
+      - rating = current_user.ratings.find_by(item: item)
+      - rating_val = rating.present? ? rating.value : 0
+      - 5.times do |i|
+        - value = i + 1
+        - if rating_val < value
+          div class="value item_#{item.id} val_#{value}"
+            = link_to image_tag('', size: '25x25', class: 'star_empty'), rating_item_path(item, value: value), method: 'post', remote: true
+
+        - else
+          div class="value item_#{item.id} val_#{value} persisted"
+            = link_to  image_tag('', size: '25x25', class: 'star'), rating_item_path(item, value: value), method: 'post', remote: true
+
+    = link_to item.name, item_path(item)
