@@ -5,6 +5,11 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  enum department: Constants::DEPARTMENTS
+
+  validates :email, :name, :department, :grade, presence: true
+  validates :email, uniqueness: true
+
   def rated_items_and(items)
     self.rated_items.joins(:ratings).merge(Rating.where(item: items)).uniq
   end

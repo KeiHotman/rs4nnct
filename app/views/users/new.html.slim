@@ -1,10 +1,5 @@
-h2 ユーザ登録
+.contents
+  h2 ユーザ登録
 
-= simple_form_for @user do |f|
-  = f.input :name
-  = f.input :email
-  = f.input :grade
-  = f.input :department
-  = f.input :password
-  = f.input :password_confirmation
-  = f.submit
+  = simple_form_for @user do |f|
+    = render partial: 'users/form', locals: {f: f}

@@ -6,6 +6,8 @@ FactoryGirl.define do
     sequence :email do |n|
       "u#{n}@exampl.com"
     end
+    grade { rand(1..5) }
+    department { Constants::DEPARTMENTS.keys[1..8].sample }
     password "password"
   end
 

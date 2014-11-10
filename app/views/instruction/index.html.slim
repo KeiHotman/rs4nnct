@@ -11,7 +11,11 @@
       h3 = "#{current_user.name}さんの登録情報"
       dl
         dt 所属学科・専攻
-        dd = t("activerecord.modules.constants.departments#{current_user.department}")
+        dd
+          - if current_user.department
+            = t("activerecord.modules.constants.departments.#{current_user.department}")
+          - else
+            '登録情報なし
         dt 学年
         dd = "#{current_user.grade}年"
       = link_to '登録情報を変更する', edit_user_path(current_user)

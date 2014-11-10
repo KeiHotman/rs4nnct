@@ -1,0 +1,7 @@
+= f.input :name
+= f.input :email
+= f.input :grade, collection: 1..5
+= f.input :department, collection: Constants::DEPARTMENTS_LOCALE
+= f.input :password, required: true
+= f.input :password_confirmation, required: true
+= f.submit
