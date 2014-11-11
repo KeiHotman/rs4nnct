@@ -66,3 +66,5 @@ group :development, :test do
 end
 
 # gem 'poppler'
+
+gem 'rails_12factor', group: :production
