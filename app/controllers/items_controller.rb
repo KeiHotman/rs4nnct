@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!
+  protect_from_forgery except: %i(create)
+  before_action :authenticate_user!, except: %i(create)
   before_action :set_items, only: %i(index)
 
   def index
@@ -11,6 +12,13 @@ class ItemsController < ApplicationController
     @rating = Rating.find_by(item: @item, user: current_user)
     @next_item = current_user.unrated_items.sample
     @unrated_items_num = current_user.unrated_items(:own).size
+  end
+
+  def create
+    @item = Item.new(item_params)
+
+    @result = @item.save
+    render "create", formats: [:json], handlers: [:jbuilder]
   end
 
   def rating
@@ -38,5 +46,9 @@ class ItemsController < ApplicationController
       @grade = params[:grade].presence
       @department = params[:department].presence
       @items = current_user.rated_items
+    end
+
+    def item_params
+      params.require(:item).permit(:name, :english_name, :term, :credit_num, :credit_requirement, :features_attributes)
     end
 end
