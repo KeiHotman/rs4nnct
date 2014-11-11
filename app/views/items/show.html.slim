@@ -8,17 +8,15 @@
         - value = i + 1
         - if rating_val < value
           div class="value item_#{@item.id} val_#{value}"
-            = link_to image_tag('', size: '25x25', class: 'star_empty'), rating_item_path(@item, value: value), method: 'post', remote: true
+            = link_to image_tag('', size: '25x25', class: 'star_empty'), rating_item_path(@item, value: value), method: 'post'
 
         - else
           div class="value item_#{@item.id} val_#{value} persisted"
-            = link_to  image_tag('', size: '25x25', class: 'star'), rating_item_path(@item, value: value), method: 'post', remote: true
+            = link_to  image_tag('', size: '25x25', class: 'star'), rating_item_path(@item, value: value), method: 'post'
 
     - if @next_item
-      = link_to "次の未評価の科目", item_path(@next_item)
-      '(残り
+      '未評価の科目数:&nbsp;
       = content_tag :span, @unrated_items_num, id: 'unrated_items_num'
-      '個)
     - else
       = link_to "一覧", items_path
 

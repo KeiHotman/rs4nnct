@@ -54,14 +54,15 @@
       = simple_form_for @user do |f|
         = render partial: 'users/form', locals: {f: f}
 
-    /.content
-      h4 ログインする
-      = form_tag session_path
-        div
-          label メールアドレス
-          = text_field_tag :email
-        div
-          label パスワード
-          = password_field_tag :password
-        div
-          = submit_tag 'ログイン'
+    - if Rails.env.development?
+      .content
+        h4 ログインする
+        = form_tag session_path
+          div
+            label メールアドレス
+            = text_field_tag :email
+          div
+            label パスワード
+            = password_field_tag :password
+          div
+            = submit_tag 'ログイン'
