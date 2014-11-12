@@ -16,6 +16,20 @@ item_refine = (grade, department)->
     dataType: 'script'
   false
 
+$(document).on 'click', '.rating .value a', ->
+  value = parseInt($(this).attr('value'))
+  $.ajax
+    type: 'POST'
+    url: '/items/' + $(this).attr('item_id') + '/rating'
+    data:
+      value: value
+    dataType: 'script'
+    success: ->
+      if value <= 2
+        $('.opinion').show()
+  false
+
+
 # mouseover stars to be rating on courses#show
 $(document).on 'mouseenter', '.rating .value', ->
   $(this).find('img').addClass('star')

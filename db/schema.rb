@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103061830) do
+ActiveRecord::Schema.define(version: 20141111221339) do
 
   create_table "features", force: true do |t|
     t.integer  "item_id"
@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(version: 20141103061830) do
     t.string   "credit_requirement"
   end
 
+  create_table "opinions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.integer  "subject_id"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "opinions", ["item_id"], name: "index_opinions_on_item_id", using: :btree
+  add_index "opinions", ["subject_id"], name: "index_opinions_on_subject_id", using: :btree
+  add_index "opinions", ["user_id"], name: "index_opinions_on_user_id", using: :btree
+
   create_table "ratings", force: true do |t|
     t.integer  "user_id"
     t.integer  "item_id"
@@ -59,6 +72,12 @@ ActiveRecord::Schema.define(version: 20141103061830) do
 
   add_index "similarities", ["subject_id"], name: "index_similarities_on_subject_id", using: :btree
   add_index "similarities", ["target_id"], name: "index_similarities_on_target_id", using: :btree
+
+  create_table "subjects", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

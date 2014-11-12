@@ -41,6 +41,11 @@ body {
           background-image: image-url('star_empty.png');
         }
       }
+      .opinion {
+        display: none;
+        clear: right;
+        float: right;
+      }
     }
 
     dt {

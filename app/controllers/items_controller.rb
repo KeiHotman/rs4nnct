@@ -12,6 +12,10 @@ class ItemsController < ApplicationController
     @rating = Rating.find_by(item: @item, user: current_user)
     @next_item = current_user.unrated_items.sample
     @unrated_items_num = current_user.unrated_items(:own).size
+    @subjects = Subject.all
+    @subjects.each do |s|
+      @item.opinions.build(subject: s)
+    end
   end
 
   def create
@@ -41,6 +45,13 @@ class ItemsController < ApplicationController
     end
   end
 
+  def opinion
+    @item = Item.find(params[:id])
+    @item.update(opinion_params)
+    @next_item = current_user.unrated_items.sample
+    redirect_to item_path(@next_item)
+  end
+
   private
     def set_items
       @grade = params[:grade].presence
@@ -50,5 +61,9 @@ class ItemsController < ApplicationController
 
     def item_params
       params.require(:item).permit(:year, :grade, :department, :name, :english_name, :term, :credit_num, :credit_requirement, features_attributes: [:name, :content])
+    end
+
+    def opinion_params
+      params.require(:item).permit(opinions_attributes: [:subject_id, :value])
     end
 end

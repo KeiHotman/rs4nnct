@@ -8,11 +8,18 @@
         - value = i + 1
         - if rating_val < value
           div class="value item_#{@item.id} val_#{value}"
-            = link_to image_tag('', size: '25x25', class: 'star_empty'), rating_item_path(@item, value: value), method: 'post'
+            = link_to image_tag('', size: '25x25', class: 'star_empty'), '#', value: value, item_id: @item.id
 
         - else
           div class="value item_#{@item.id} val_#{value} persisted"
             = link_to  image_tag('', size: '25x25', class: 'star'), rating_item_path(@item, value: value), method: 'post'
+    .opinion
+      = form_for @item, url: opinion_item_path(@item) do |f|
+        = f.fields_for :opinions do |of|
+          label = of.object.subject.title
+          = of.hidden_field :subject_id, value: of.object.subject.id
+          = of.check_box :value
+        = f.submit
 
     - if @next_item
       '未評価の科目数:&nbsp;
