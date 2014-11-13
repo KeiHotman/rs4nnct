@@ -68,3 +68,6 @@ end
 # gem 'poppler'
 
 gem 'rails_12factor', group: :production
+
+gem 'activeadmin', github: 'activeadmin'
+gem 'devise'
