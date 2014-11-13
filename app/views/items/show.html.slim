@@ -3,7 +3,7 @@
 
   .content
     .rating
-      - rating_val = @rating.present? ? @rating.value : 0
+      - rating_val = @rating.present? && @rating.value ? @rating.value : 0
       - 5.times do |i|
         - value = i + 1
         - if rating_val < value
@@ -20,13 +20,18 @@
           div class="#{div_class}"
             = link_to star_img, '#', value: value, item_id: @item.id
 
+      = link_to '履修していない', rating_item_path(@item), style: "display: block;", method: :post
+
     .opinion
+      h3 否定的な評価を入力した主たる要因となった特徴を入力してください（複数回答可）
       = form_for @item, url: opinion_item_path(@item) do |f|
         = f.fields_for :opinions do |of|
-          label = of.object.subject.title
-          = of.hidden_field :subject_id, value: of.object.subject.id
-          = of.check_box :value
-        = f.submit
+          div
+            = of.hidden_field :subject_id, value: of.object.subject.id
+            = of.check_box :value
+            = of.label of.object.subject.title
+
+        div style="display:block;" = f.submit
 
     - if @next_item
       '未評価の科目数:&nbsp;

@@ -28,7 +28,12 @@ class ItemsController < ApplicationController
   def rating
     @item = Item.find(params[:id])
     @rating = Rating.find_or_initialize_by(item: @item, user: current_user)
-    @rating.value = params[:value]
+    if params[:value].present?
+      @rating.value = params[:value]
+      @rating.taken = true
+    else
+      @rating.taken = false
+    end
     if @rating.save
       respond_to do |format|
         format.html do
@@ -49,7 +54,11 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.update(opinion_params)
     @next_item = current_user.unrated_items.sample
-    redirect_to item_path(@next_item)
+    if @next_item
+      redirect_to item_path(@next_item)
+    else
+      redirect_to items_path
+    end
   end
 
   private

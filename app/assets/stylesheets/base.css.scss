@@ -42,9 +42,17 @@ body {
         }
       }
       .opinion {
+        border: solid 1px #999;
+        padding: 3px;
         display: none;
         clear: right;
         float: right;
+        width: 200px;
+        div {
+          margin-right: 5px;
+          float: left;
+        }
+        h3 { font-size: 12px; }
       }
     }
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113004007) do
+ActiveRecord::Schema.define(version: 20141113031616) do
 
   create_table "features", force: true do |t|
     t.integer  "item_id"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20141113004007) do
     t.boolean  "prediction",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "taken"
   end
 
   add_index "ratings", ["item_id"], name: "index_ratings_on_item_id", using: :btree

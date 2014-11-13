@@ -2,7 +2,7 @@
   .content.listed_item
     .rating
       - rating = current_user.ratings.find_by(item: item)
-      - rating_val = rating.present? ? rating.value : 0
+      - rating_val = rating.present? && rating.value ? rating.value : 0
       - 5.times do |i|
         - value = i + 1
         - if rating_val < value
