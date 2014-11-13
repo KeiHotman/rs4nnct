@@ -73,6 +73,6 @@ class ItemsController < ApplicationController
     end
 
     def opinion_params
-      params.require(:item).permit(opinions_attributes: [:subject_id, :value])
+      params.require(:item).permit(opinions_attributes: [:subject_id, :value, :user_id])
     end
 end
