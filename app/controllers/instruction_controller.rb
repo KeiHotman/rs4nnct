@@ -1,7 +1,7 @@
 class InstructionController < ApplicationController
   def index
     if current_user
-      @next_item = current_user.unrated_items(:own).sample
+      @next_item = current_user.unrated_items.sample
     else
       @user = User.new
     end

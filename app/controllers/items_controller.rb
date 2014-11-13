@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @rating = Rating.find_by(item: @item, user: current_user)
     @next_item = current_user.unrated_items.sample
-    @unrated_items_num = current_user.unrated_items(:own).size
+    @unrated_items_num = current_user.unrated_items.size
     @subjects = Subject.all
     @subjects.each do |s|
       @item.opinions.build(subject: s)

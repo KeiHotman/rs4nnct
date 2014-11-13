@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      if @next_item = @user.unrated_items(:own).sample
+      if @next_item = @user.unrated_items.sample
         redirect_to item_path(@next_item), notice: '被験者情報が登録されました。これより各科目について評価を入力してください。'
       else
         redirect_to instruction_exit_path, notice: '実験対象の科目がありませんでした。'
