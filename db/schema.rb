@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111221339) do
+ActiveRecord::Schema.define(version: 20141113004007) do
 
   create_table "features", force: true do |t|
     t.integer  "item_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20141111221339) do
     t.string   "term"
     t.integer  "credit_num"
     t.string   "credit_requirement"
+    t.string   "provided_by"
   end
 
   create_table "opinions", force: true do |t|

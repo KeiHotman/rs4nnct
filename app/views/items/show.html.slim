@@ -7,12 +7,19 @@
       - 5.times do |i|
         - value = i + 1
         - if rating_val < value
-          div class="value item_#{@item.id} val_#{value}"
-            = link_to image_tag('', size: '25x25', class: 'star_empty'), '#', value: value, item_id: @item.id
-
+          - div_class = "value item_#{@item.id} val_#{value}"
+          - star_img = image_tag('', size: '25x25', class: 'star_empty')
         - else
-          div class="value item_#{@item.id} val_#{value} persisted"
-            = link_to  image_tag('', size: '25x25', class: 'star'), rating_item_path(@item, value: value), method: 'post'
+          - div_class = "value item_#{@item.id} val_#{value} persisted"
+          - star_img = image_tag('', size: '25x25', class: 'star')
+
+        - if value > 2
+          div class="#{div_class}"
+            = link_to star_img, rating_item_path(@item, value: value), method: :post
+        - else
+          div class="#{div_class}"
+            = link_to star_img, '#', value: value, item_id: @item.id
+
     .opinion
       = form_for @item, url: opinion_item_path(@item) do |f|
         = f.fields_for :opinions do |of|
@@ -29,6 +36,8 @@
 
   .content
     dl
+      dt 教官
+      dd = @item.provided_by
       dt 学年
       dd = @item.grade
       dt 学科
