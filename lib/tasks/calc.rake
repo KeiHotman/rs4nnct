@@ -35,8 +35,8 @@ namespace :calc do
           target_deviation_square_sum += target_rating_deviation ** 2
         end
 
-        similarity.value = both_deviation_products_sum /
-          (Math.sqrt(subject_deviation_square_sum) * Math.sqrt(target_deviation_square_sum))
+        similarity.value = both_deviation_products_sum / (Math.sqrt(subject_deviation_square_sum) * Math.sqrt(target_deviation_square_sum))
+        similarity.value = 0 if similarity.value.nan?
         similarity.rated_items_num = both_rated_items.size
         similarity.save
       end
@@ -51,16 +51,16 @@ namespace :calc do
     users = User.all
     items = Item.all
     users.each do |user|
-      similar_users = User.joins(:targeted_similarities).merge(Similarity.where(subject: user).where('value > 0.7').limit(2))
+      similar_users = User.joins(:targeted_similarities).merge(Similarity.where(subject: user).order('value desc').limit(2))
       items.each do |item|
-        rating = Rating.find_or_initialize_by(user: user, item: item)
-        next if !rating.prediction && rating.persisted?
+        rating = Rating.find_or_initialize_by(user: user, item: item, taken: true)
+        next if (!rating.prediction && rating.persisted?)
 
         similarity_deviation_product = 0
         total_similarity = 0
         similar_users.each do |similar_user|
           similarity = Similarity.find_by(subject: user, target: similar_user)
-          similars_rating = Rating.find_by(user: similar_user, item: item)
+          similars_rating = Rating.find_by(user: similar_user, item: item, taken: true)
           if similars_rating
             similarity_deviation_product += similarity.value * (similars_rating.value - similar_user.ratings.average(:value))
             total_similarity += similarity.value
@@ -70,8 +70,9 @@ namespace :calc do
           prediction = user.ratings.average(:value) + similarity_deviation_product / total_similarity
           rating.assign_attributes(value: prediction, prediction: true)
           rating.save
-        rescue
-          puts "Error: user: #{user.name}, item: #{item.title}"
+        rescue => e
+          puts "Error: user: #{user.name}, item: #{item.name}"
+          puts e.message
         end
       end
     end
