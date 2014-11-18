@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   # items
   resources :items do
+    get :recommendation, on: :collection
     post :rating, on: :member
     patch :opinion, on: :member
   end

@@ -18,19 +18,9 @@
             '登録情報なし
         dt 学年
         dd = "#{current_user.grade}年"
-      = link_to '登録情報を変更する', edit_user_path(current_user)
 
     .content
-      - if @next_item
-        = link_to '未評価のアイテムを見る', item_path(@next_item)
-      - else
-        = link_to '一覧', items_path
-        br
-        = link_to '終了する', instruction_exit_path
-
-    - if Rails.env.development?
-      .content
-        = link_to 'ログアウト', session_path, method: :delete
+      div = link_to '推薦リスト', recommendation_items_path
 
   - else
     .content
@@ -49,20 +39,19 @@
         'このことに同意いただければ、実験をはじめてください。
 
     .content
+      h2 ログイン
+      = form_tag session_path
+        div
+          label メールアドレス
+          = text_field_tag :email
+        div
+          label パスワード
+          = password_field_tag :password
+        div
+          = submit_tag 'ログイン'
+
+    .content
       h2 ユーザ登録
 
       = simple_form_for @user do |f|
         = render partial: 'users/form', locals: {f: f}
-
-    - if Rails.env.development?
-      .content
-        h4 ログインする
-        = form_tag session_path
-          div
-            label メールアドレス
-            = text_field_tag :email
-          div
-            label パスワード
-            = password_field_tag :password
-          div
-            = submit_tag 'ログイン'

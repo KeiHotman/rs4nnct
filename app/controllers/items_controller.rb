@@ -28,19 +28,28 @@ class ItemsController < ApplicationController
   def rating
     @item = Item.find(params[:id])
     @rating = Rating.find_or_initialize_by(item: @item, user: current_user)
+
     if params[:value].present?
       @rating.value = params[:value]
       @rating.taken = true
     else
       @rating.taken = false
     end
+
+    @previous_prediction = @rating.prediction
+    @rating.prediction = false
+
     if @rating.save
       respond_to do |format|
         format.html do
-          if @next_item = current_user.unrated_items.sample
-            redirect_to item_path(@next_item)
+          if @previous_prediction
+            redirect_to recommendation_items_path
           else
-            redirect_to items_path, notice: "全てのアイテムを評価しました。"
+            if @next_item = current_user.unrated_items.sample
+              redirect_to item_path(@next_item)
+            else
+              redirect_to items_path, notice: "全てのアイテムを評価しました。"
+            end
           end
         end
         format.js
@@ -48,6 +57,10 @@ class ItemsController < ApplicationController
     else
       redirect_to item_path(@item), alert: "不正な値です。"
     end
+  end
+
+  def recommendation
+    @ratings = Rating.where(user: current_user, prediction: true).where('value >= ?', 4.0).order('value desc')
   end
 
   def opinion

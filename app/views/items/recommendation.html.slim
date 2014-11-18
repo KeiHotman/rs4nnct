@@ -1,0 +1,5 @@
+.contents
+  - @ratings.each do |rating|
+    - item = rating.item
+    .content
+      = link_to item.name, item
